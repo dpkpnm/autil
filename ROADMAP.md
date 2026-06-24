@@ -1,22 +1,25 @@
 # Autil Roadmap
 
-Add ideas here. Gemini reads this list and picks what to research and implement next.
-Items are never removed — BUILT.md tracks what's already shipped.
+Single source of truth. Add new rows to the table — Gemini picks from `backlog`, Claude marks `shipped`.
 
-## Backlog
-
-- JWT decoder — paste a JWT, see header/payload/signature decoded, expiry highlighted
-- URL inspector — break a URL into scheme/host/path/params, decode encoded values
-- HEX color inspector — paste a hex or rgb color, see conversions across all color spaces
-- Base64 inspector — paste base64, auto-detect and decode to text or binary preview
-- Regex tester — paste a regex and test strings against it live, see match groups
-- Unix timestamp converter — paste a unix timestamp or ISO date, convert between formats
-- YAML ↔ JSON — paste YAML or JSON, convert in both directions with syntax highlighting
-- SQL formatter — paste raw SQL, get it indented and formatted, keywords uppercased
-- Diff tool (text) — paste two blocks of plain text, see a line-by-line diff
-- Number base converter — paste a number in any base (bin/oct/dec/hex), convert all at once
-- HTTP status code lookup — paste a status code, get description and common causes
-- Markdown previewer — paste markdown, see the rendered output side by side
-- DNS lookup — paste a domain, resolve A/AAAA/MX/TXT/CNAME records using DoH
-- UUID generator and inspector — generate UUIDs, or paste one to decode its version and timestamp
-- Hash inspector — paste text, see MD5/SHA1/SHA256/SHA512 in one shot using WebCrypto
+| Tool | Description | Status | Date |
+|------|-------------|--------|------|
+| Data Grid | CSV · TSV · JSON array → virtual scroll grid, sort, filter, group, IndexedDB | shipped | 2026-06-24 |
+| JSON Semantic Diff | Compare two JSON payloads, see additions/deletions/modifications highlighted | shipped | 2026-06-24 |
+| Cron Humanizer | Paste a cron expression, get human-readable schedule and next 5 runtimes | shipped | 2026-06-24 |
+| JWT Decoder | Paste a JWT, see decoded header/payload/signature with expiry highlighted | backlog | |
+| URL Inspector | Break a URL into components, decode query params and encoded values | backlog | |
+| HEX Color Inspector | Paste hex or rgb, see conversions across all color spaces with swatches | backlog | |
+| Base64 Inspector | Paste base64, auto-detect and decode to text or binary preview | backlog | |
+| Regex Tester | Paste a regex and test strings against it live, see match groups highlighted | backlog | |
+| Unix Timestamp Converter | Paste a unix timestamp or ISO date, convert between all common formats | backlog | |
+| YAML ↔ JSON | Paste YAML or JSON, convert in both directions with syntax display | backlog | |
+| SQL Formatter | Paste raw SQL, get it indented, formatted, and keywords uppercased | backlog | |
+| Text Diff | Paste two blocks of plain text, see a line-by-line diff | backlog | |
+| Number Base Converter | Paste a number in any base, see bin/oct/dec/hex all at once | backlog | |
+| HTTP Status Lookup | Paste a status code, get name, description, and common causes | backlog | |
+| Markdown Previewer | Paste markdown, see rendered output side by side | backlog | |
+| DNS Lookup | Paste a domain, resolve A/AAAA/MX/TXT/CNAME via DNS over HTTPS | backlog | |
+| UUID Inspector | Generate UUIDs or paste one to decode version, variant, and timestamp | backlog | |
+| Hash Generator | Paste text, get MD5/SHA-1/SHA-256/SHA-512 all at once via WebCrypto | backlog | |
+| SVG Path Visualizer | Paste SVG path data, see interactive preview and cleaned output | deferred | |
