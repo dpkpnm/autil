@@ -1,0 +1,710 @@
+<section id="cron-expression-humanizer">
+  <style>
+    #cron-expression-humanizer {
+      font-family: 'Courier New', Courier, monospace;
+      background: #fff;
+      color: #000;
+      border: 1px solid #000;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      min-height: 100dvh;
+    }
+
+    #cron-expression-humanizer * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .ceh-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .ceh-title {
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .ceh-meta {
+      font-size: 0.6rem;
+      color: #666;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ceh-input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      border-bottom: 1px solid #000;
+    }
+
+    .ceh-input-wrap {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #000;
+    }
+
+    .ceh-input-label {
+      padding: 6px 12px;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #000;
+      color: #666;
+    }
+
+    .ceh-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 14px 16px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      background: #fff;
+      color: #000;
+    }
+
+    .ceh-input::placeholder {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .ceh-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px 16px;
+      gap: 8px;
+    }
+
+    .ceh-btn {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: #000;
+      color: #fff;
+      border: 1px solid #000;
+      padding: 8px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ceh-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .ceh-btn-ghost {
+      background: #fff;
+      color: #000;
+    }
+
+    .ceh-btn-ghost:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .ceh-examples {
+      padding: 10px 16px;
+      border-bottom: 1px solid #000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ceh-examples-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+      flex-shrink: 0;
+    }
+
+    .ceh-example-chip {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 3px 8px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .ceh-example-chip:hover {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    .ceh-output {
+      padding: 0;
+      overflow: auto;
+    }
+
+    .ceh-empty {
+      padding: 40px 24px;
+      font-size: 0.65rem;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .ceh-error {
+      margin: 24px;
+      padding: 14px 18px;
+      border-left: 3px solid #000;
+      background: #f4f4f4;
+    }
+
+    .ceh-error-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .ceh-error-msg {
+      font-size: 0.72rem;
+      line-height: 1.5;
+    }
+
+    .ceh-result {
+      display: grid;
+      grid-template-rows: auto auto;
+    }
+
+    .ceh-human {
+      padding: 28px 24px;
+      border-bottom: 1px solid #000;
+    }
+
+    .ceh-human-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .ceh-human-text {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+
+    .ceh-fields {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid #000;
+    }
+
+    .ceh-field {
+      padding: 10px 14px;
+      border-right: 1px solid #000;
+    }
+
+    .ceh-field:last-child {
+      border-right: none;
+    }
+
+    .ceh-field-name {
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 4px;
+    }
+
+    .ceh-field-val {
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 0.06em;
+    }
+
+    .ceh-next-runs {
+      padding: 20px 24px;
+    }
+
+    .ceh-next-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .ceh-run-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ceh-run-item {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.72rem;
+    }
+
+    .ceh-run-item:last-child {
+      border-bottom: none;
+    }
+
+    .ceh-run-idx {
+      font-size: 0.55rem;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    .ceh-run-dt {
+      letter-spacing: 0.05em;
+    }
+
+    .ceh-run-rel {
+      font-size: 0.6rem;
+      color: #999;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .autil-offline {
+      padding: 16px 24px;
+      font-size: 0.7rem;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div class="ceh-header">
+    <span class="ceh-title">Cron Expression Humanizer</span>
+    <span class="ceh-meta">100% local &mdash; no data leaves your browser</span>
+  </div>
+
+  <div class="ceh-input-row">
+    <div class="ceh-input-wrap">
+      <div class="ceh-input-label">Cron Expression &mdash; minute hour day month weekday</div>
+      <input class="ceh-input" id="ceh-input" type="text" placeholder="0 9 * * 1-5" autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="ceh-actions">
+      <button class="ceh-btn" id="ceh-run">Humanize</button>
+      <button class="ceh-btn ceh-btn-ghost" id="ceh-clear">Clear</button>
+    </div>
+  </div>
+
+  <div class="ceh-examples">
+    <span class="ceh-examples-label">Examples</span>
+    <span class="ceh-example-chip" data-expr="* * * * *">* * * * *</span>
+    <span class="ceh-example-chip" data-expr="0 9 * * 1-5">0 9 * * 1-5</span>
+    <span class="ceh-example-chip" data-expr="30 18 * * 5">30 18 * * 5</span>
+    <span class="ceh-example-chip" data-expr="0 0 1 * *">0 0 1 * *</span>
+    <span class="ceh-example-chip" data-expr="0 0 * * 0">0 0 * * 0</span>
+    <span class="ceh-example-chip" data-expr="*/15 * * * *">*/15 * * * *</span>
+    <span class="ceh-example-chip" data-expr="0 8,12,17 * * 1-5">0 8,12,17 * * 1-5</span>
+    <span class="ceh-example-chip" data-expr="0 0 1 1 *">0 0 1 1 *</span>
+  </div>
+
+  <div class="ceh-output" id="ceh-output">
+    <div class="ceh-empty">Enter a cron expression above and press Humanize</div>
+  </div>
+
+  <script>
+    (function () {
+      if (!window.AUTIL_FLAGS?.CRON_EXPRESSION_HUMANIZER) {
+        document.getElementById('cron-expression-humanizer').innerHTML = '<p class="autil-offline">Tool offline.</p>';
+        return;
+      }
+
+      const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
+      const MONTH_DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+      function ordinal(n) {
+        const s = ['th','st','nd','rd'];
+        const v = n % 100;
+        return n + (s[(v-20)%10] || s[v] || s[0]);
+      }
+
+      function isLeap(y) {
+        return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+      }
+
+      function daysInMonth(m, y) {
+        if (m === 1) return isLeap(y) ? 29 : 28;
+        return MONTH_DAYS[m];
+      }
+
+      // Parse a cron field into a sorted array of valid integers.
+      // Returns null on parse error.
+      function parseField(raw, min, max) {
+        const values = new Set();
+
+        for (const part of raw.split(',')) {
+          const stepMatch = part.match(/^(.+)\/(\d+)$/);
+          let range = stepMatch ? stepMatch[1] : part;
+          const step = stepMatch ? parseInt(stepMatch[2], 10) : 1;
+
+          if (step < 1) return null;
+
+          let lo, hi;
+          if (range === '*') {
+            lo = min; hi = max;
+          } else if (range.includes('-')) {
+            const [a, b] = range.split('-').map(Number);
+            if (isNaN(a) || isNaN(b)) return null;
+            lo = a; hi = b;
+          } else {
+            const v = Number(range);
+            if (isNaN(v)) return null;
+            lo = hi = v;
+          }
+
+          if (lo < min || hi > max || lo > hi) return null;
+
+          for (let i = lo; i <= hi; i += step) values.add(i);
+        }
+
+        return [...values].sort((a, b) => a - b);
+      }
+
+      function validateAndParse(expr) {
+        const parts = expr.trim().split(/\s+/);
+        if (parts.length !== 5) throw new Error('Expected exactly 5 fields: minute hour day month weekday');
+
+        const [minR, hourR, domR, monR, dowR] = parts;
+        const minutes  = parseField(minR,  0, 59);
+        const hours    = parseField(hourR, 0, 23);
+        const doms     = parseField(domR,  1, 31);
+        const months   = parseField(monR,  1, 12);
+        const dows     = parseField(dowR,  0,  7);
+
+        if (!minutes) throw new Error('Invalid minute field: ' + minR);
+        if (!hours)   throw new Error('Invalid hour field: ' + hourR);
+        if (!doms)    throw new Error('Invalid day-of-month field: ' + domR);
+        if (!months)  throw new Error('Invalid month field: ' + monR);
+        if (!dows)    throw new Error('Invalid weekday field: ' + dowR);
+
+        const domWild = domR === '*';
+        const dowWild = dowR === '*';
+
+        return { parts, minutes, hours, doms, months, dows, domWild, dowWild };
+      }
+
+      // Advance date by one minute in local time (mutates Date object not safe — returns new)
+      function addMinute(d) {
+        return new Date(d.getTime() + 60000);
+      }
+
+      function matchesDOW(dows, dowWild, d) {
+        if (dowWild) return true;
+        const dow = d.getDay(); // 0=Sun
+        return dows.includes(dow) || dows.includes(dow === 0 ? 7 : dow);
+      }
+
+      function matchesDOM(doms, domWild, d) {
+        if (domWild) return true;
+        return doms.includes(d.getDate());
+      }
+
+      function nextRuns(parsed, count, fromDate) {
+        const { minutes, hours, doms, months, dows, domWild, dowWild } = parsed;
+        const results = [];
+        // Start from next minute
+        let cur = new Date(fromDate.getTime());
+        cur.setSeconds(0, 0);
+        cur = addMinute(cur);
+
+        const limit = 100000; // safety guard
+        let iter = 0;
+        while (results.length < count && iter < limit) {
+          iter++;
+          const mo = cur.getMonth() + 1; // 1-12
+          const dom = cur.getDate();
+          const hr = cur.getHours();
+          const mn = cur.getMinutes();
+
+          if (!months.includes(mo)) {
+            // jump to first day of next valid month
+            const nextMo = months.find(m => m > mo) || months[0];
+            const yr = nextMo <= mo ? cur.getFullYear() + 1 : cur.getFullYear();
+            cur = new Date(yr, nextMo - 1, 1, 0, 0, 0, 0);
+            continue;
+          }
+
+          // Check DOM/DOW restriction
+          const domOk = domWild  ? true : doms.includes(dom);
+          const dowOk = dowWild  ? true : matchesDOW(dows, dowWild, cur);
+          const dayOk = (!domWild && !dowWild) ? (domOk || dowOk) : (domWild ? dowOk : domOk);
+
+          if (!dayOk) {
+            // advance to next day at 00:00
+            cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate() + 1, 0, 0, 0, 0);
+            continue;
+          }
+
+          if (!hours.includes(hr)) {
+            const nextHr = hours.find(h => h > hr);
+            if (nextHr === undefined) {
+              cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate() + 1, 0, 0, 0, 0);
+            } else {
+              cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate(), nextHr, 0, 0, 0);
+            }
+            continue;
+          }
+
+          if (!minutes.includes(mn)) {
+            const nextMn = minutes.find(m => m > mn);
+            if (nextMn === undefined) {
+              // next valid hour
+              const nextHr = hours.find(h => h > hr);
+              if (nextHr === undefined) {
+                cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate() + 1, 0, 0, 0, 0);
+              } else {
+                cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate(), nextHr, 0, 0, 0);
+              }
+            } else {
+              cur = new Date(cur.getFullYear(), cur.getMonth(), cur.getDate(), hr, nextMn, 0, 0);
+            }
+            continue;
+          }
+
+          results.push(new Date(cur));
+          cur = addMinute(cur);
+        }
+
+        return results;
+      }
+
+      // Humanize helpers
+      function humanizeList(arr, names) {
+        if (!arr || arr.length === 0) return '';
+        const mapped = names ? arr.map(v => names[v]) : arr.map(String);
+        if (mapped.length === 1) return mapped[0];
+        if (mapped.length === 2) return mapped[0] + ' and ' + mapped[1];
+        return mapped.slice(0, -1).join(', ') + ', and ' + mapped[mapped.length - 1];
+      }
+
+      function isConsecutive(arr) {
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] !== arr[i-1] + 1) return false;
+        }
+        return true;
+      }
+
+      function describeField(raw, values, min, max, names, singularUnit, pluralUnit) {
+        if (values.length === (max - min + 1)) return 'every ' + singularUnit;
+
+        // step pattern  */N
+        const stepMatch = raw.match(/^\*\/(\d+)$/);
+        if (stepMatch) {
+          const step = parseInt(stepMatch[1], 10);
+          return 'every ' + step + ' ' + pluralUnit;
+        }
+
+        // single value
+        if (values.length === 1) {
+          return names ? names[values[0]] : (singularUnit + ' ' + values[0]);
+        }
+
+        // range pattern N-M
+        if (raw.match(/^\d+-\d+$/) && isConsecutive(values)) {
+          const lo = names ? names[values[0]] : values[0];
+          const hi = names ? names[values[values.length - 1]] : values[values.length - 1];
+          return lo + ' through ' + hi;
+        }
+
+        // list
+        return humanizeList(values, names);
+      }
+
+      function humanize(expr) {
+        const parsed = validateAndParse(expr);
+        const [minR, hourR, domR, monR, dowR] = parsed.parts;
+
+        const minutePart = describeField(minR, parsed.minutes, 0, 59, null, 'minute', 'minutes');
+        const hourPart   = describeField(hourR, parsed.hours,  0, 23, null, 'hour',   'hours');
+        const domPart    = describeField(domR,  parsed.doms,   1, 31, null, 'day',    'days');
+        const monPart    = describeField(monR,  parsed.months, 1, 12, MONTHS, 'month', 'months');
+        const dowPart    = describeField(dowR,  parsed.dows.map(d => d === 7 ? 0 : d), 0, 6, DAYS, 'day', 'days');
+
+        const domWild = domR === '*';
+        const dowWild = dowR === '*';
+
+        // Build time phrase
+        let timePart;
+        const allMin  = parsed.minutes.length === 60;
+        const allHour = parsed.hours.length === 24;
+
+        if (allMin && allHour) {
+          timePart = 'every minute';
+        } else if (allMin) {
+          timePart = 'every minute during ' + hourPart;
+        } else if (allHour) {
+          if (minR.startsWith('*/')) {
+            timePart = minutePart;
+          } else {
+            timePart = 'at minute ' + minutePart + ' of every hour';
+          }
+        } else {
+          // Specific hours and minutes
+          const hrLabel = parsed.hours.length === 1
+            ? pad(parsed.hours[0]) + ':' + pad(parsed.minutes[0] ?? 0)
+            : null;
+
+          if (parsed.hours.length === 1 && parsed.minutes.length === 1) {
+            timePart = 'at ' + pad(parsed.hours[0]) + ':' + pad(parsed.minutes[0]);
+          } else if (parsed.minutes.length === 1) {
+            timePart = 'at minute :' + pad(parsed.minutes[0]) + ' past ' + hourPart;
+          } else {
+            timePart = 'at minute ' + minutePart + ' past ' + hourPart;
+          }
+        }
+
+        // Build day phrase
+        let dayPart = '';
+        if (!domWild && !dowWild) {
+          dayPart = ' on ' + domPart + ' of the month or on ' + dowPart;
+        } else if (!domWild) {
+          dayPart = ' on the ' + ordinal(parsed.doms[0]) + (parsed.doms.length > 1 ? ' and others' : '') + ' of the month';
+          if (parsed.doms.length > 1) {
+            dayPart = ' on the ' + humanizeList(parsed.doms.map(ordinal)) + ' of the month';
+          }
+        } else if (!dowWild) {
+          dayPart = ' on ' + dowPart;
+        }
+
+        // Build month phrase
+        let monthPhrase = '';
+        if (parsed.months.length < 12) {
+          monthPhrase = ' in ' + monPart;
+        }
+
+        const sentence = capitalizeFirst(timePart) + dayPart + monthPhrase + '.';
+
+        return { sentence, parsed };
+      }
+
+      function pad(n) {
+        return String(n).padStart(2, '0');
+      }
+
+      function capitalizeFirst(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      function formatDateTime(d) {
+        const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        return days[d.getDay()] + ' '
+          + d.getFullYear() + '-'
+          + pad(d.getMonth() + 1) + '-'
+          + pad(d.getDate()) + '  '
+          + pad(d.getHours()) + ':' + pad(d.getMinutes());
+      }
+
+      function relativeTime(d, now) {
+        const diff = d.getTime() - now.getTime();
+        const secs = Math.round(diff / 1000);
+        if (secs < 60) return 'in ' + secs + 's';
+        const mins = Math.round(secs / 60);
+        if (mins < 60) return 'in ' + mins + 'm';
+        const hrs = Math.round(mins / 60);
+        if (hrs < 24) return 'in ' + hrs + 'h';
+        const days = Math.round(hrs / 24);
+        return 'in ' + days + 'd';
+      }
+
+      function renderResult(expr) {
+        const out = document.getElementById('ceh-output');
+        try {
+          const { sentence, parsed } = humanize(expr);
+          const runs = nextRuns(parsed, 5, new Date());
+          const now = new Date();
+
+          const fieldNames = ['Minute', 'Hour', 'Day', 'Month', 'Weekday'];
+          const fieldVals  = parsed.parts;
+
+          out.innerHTML = `
+            <div class="ceh-result">
+              <div class="ceh-human">
+                <div class="ceh-human-label">Human-readable schedule</div>
+                <div class="ceh-human-text">${escHtml(sentence)}</div>
+              </div>
+              <div class="ceh-fields">
+                ${fieldNames.map((n, i) => `
+                  <div class="ceh-field">
+                    <div class="ceh-field-name">${n}</div>
+                    <div class="ceh-field-val">${escHtml(fieldVals[i])}</div>
+                  </div>`).join('')}
+              </div>
+              <div class="ceh-next-runs">
+                <div class="ceh-next-label">Next 5 scheduled runtimes</div>
+                <ul class="ceh-run-list">
+                  ${runs.map((d, i) => `
+                    <li class="ceh-run-item">
+                      <span class="ceh-run-idx">#${i + 1}</span>
+                      <span class="ceh-run-dt">${escHtml(formatDateTime(d))}</span>
+                      <span class="ceh-run-rel">${escHtml(relativeTime(d, now))}</span>
+                    </li>`).join('')}
+                </ul>
+              </div>
+            </div>`;
+        } catch (e) {
+          out.innerHTML = `
+            <div class="ceh-error">
+              <div class="ceh-error-label">Invalid expression</div>
+              <div class="ceh-error-msg">${escHtml(e.message)}</div>
+            </div>`;
+        }
+      }
+
+      function escHtml(s) {
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      document.getElementById('ceh-run').addEventListener('click', () => {
+        const val = document.getElementById('ceh-input').value.trim();
+        if (!val) return;
+        renderResult(val);
+      });
+
+      document.getElementById('ceh-clear').addEventListener('click', () => {
+        document.getElementById('ceh-input').value = '';
+        document.getElementById('ceh-output').innerHTML = '<div class="ceh-empty">Enter a cron expression above and press Humanize</div>';
+      });
+
+      document.getElementById('ceh-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const val = e.target.value.trim();
+          if (val) renderResult(val);
+        }
+      });
+
+      document.querySelectorAll('.ceh-example-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const expr = chip.dataset.expr;
+          document.getElementById('ceh-input').value = expr;
+          renderResult(expr);
+        });
+      });
+    })();
+  </script>
+</section>

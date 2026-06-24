@@ -1,0 +1,3 @@
+# Task specs and implementations are ephemeral build artifacts
+tasks/
+implementations/
