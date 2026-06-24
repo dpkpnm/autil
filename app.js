@@ -6,6 +6,7 @@ const status = $('#status');
 
 // ── Feature flags ──────────────────────────────────────
 window.AUTIL_FLAGS = {
+  DATA_GRID:                   true,
   JSON_SEMANTIC_DIFF:          true,
   CRON_EXPRESSION_HUMANIZER:   true,
   SPREADSHEET_GRID_V1:         true,
@@ -17,9 +18,17 @@ window.AUTIL_FLAGS = {
 // ── Type detection ─────────────────────────────────────
 function detect(raw) {
   const t = raw.trim();
-  if (t.startsWith('{') || t.startsWith('['))               return 'json';
+  if (t.startsWith('[')) {
+    try {
+      const p = JSON.parse(t);
+      if (Array.isArray(p) && p.length && p[0] !== null && typeof p[0] === 'object' && !Array.isArray(p[0])) return 'csv';
+    } catch {}
+    return 'json';
+  }
+  if (t.startsWith('{'))                                     return 'json';
   if (/^[\w-]+\.[\w-]+\.[\w-]+$/.test(t))                  return 'jwt';
   if (/^https?:\/\//.test(t))                               return 'url';
+  if (t.includes('\t') && t.split('\n').length > 1)         return 'csv';
   if (t.includes(',') && t.split('\n').length > 1)          return 'csv';
   if (/^([0-9a-fA-F]{2}\s*)+$/.test(t.replace(/\s/g, ''))) return 'hex';
   if (/^[A-Za-z0-9+/]+=*$/.test(t) && t.length % 4 === 0) return 'base64';
