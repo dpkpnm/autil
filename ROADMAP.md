@@ -4,6 +4,7 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
+- Image Tools — resize, remove background, add text overlays, convert formats
 - JWT Decoder — paste a JWT, see decoded header/payload/signature with expiry highlighted
 - URL Inspector — break a URL into components, decode query params and encoded values
 - HEX Color Inspector — paste hex or rgb, see conversions across all color spaces with swatches
