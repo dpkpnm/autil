@@ -1,3 +1,26 @@
+export function preview(container, raw) {
+  const LABELS = ['Minute', 'Hour', 'Day', 'Month', 'Weekday'];
+  const parts = raw.trim().split(/\s+/);
+  if (parts.length !== 5) { container.textContent = 'Invalid cron expression'; return; }
+
+  const t = document.createElement('table');
+  t.className = 'tile-table';
+  const tr = t.insertRow();
+  parts.forEach((p, i) => {
+    const th = document.createElement('th');
+    th.textContent = LABELS[i];
+    tr.appendChild(th);
+  });
+  const tr2 = t.insertRow();
+  parts.forEach(p => { const td = tr2.insertCell(); td.textContent = p; });
+  container.appendChild(t);
+
+  const meta = document.createElement('div');
+  meta.className = 'tile-meta';
+  meta.textContent = 'Cron expression';
+  container.appendChild(meta);
+}
+
 export function render(container, raw) {
   if (!window.AUTIL_FLAGS?.CRON_EXPRESSION_HUMANIZER) {
     container.innerHTML = '<p class="tool-offline">Tool offline.</p>';

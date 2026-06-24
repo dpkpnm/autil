@@ -766,3 +766,183 @@ astatus[data-ready] { color: var(--ink); opacity: 0.25; }
   transition: opacity 0.2s, transform 0.2s;
 }
 .dg-toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── Tile launcher ────────────────────────────────────── */
+.tiles-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;
+  height: 2.25rem;
+  border-bottom: var(--thin);
+  flex-shrink: 0;
+}
+
+.tiles-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: var(--thin);
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+  transition: background 0.1s, color 0.1s;
+}
+
+.tiles-back:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.tiles-type {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.4;
+}
+
+amain {
+  display: flex;
+  flex-direction: column;
+}
+
+.tiles-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0;
+  flex: 1;
+  overflow-y: auto;
+  align-content: start;
+}
+
+.tile {
+  border-right: var(--thin);
+  border-bottom: var(--thin);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  transition: background 0.1s;
+}
+
+.tile:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.tile:hover .tile-meta,
+.tile:hover .tile-key {
+  color: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+
+.tile:hover .tile-table th,
+.tile:hover .tile-table td {
+  border-color: color-mix(in srgb, var(--paper) 20%, transparent);
+  color: var(--paper);
+}
+
+.tile-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: var(--thin);
+  flex-shrink: 0;
+}
+
+.tile:hover .tile-head {
+  border-bottom-color: color-mix(in srgb, var(--paper) 20%, transparent);
+}
+
+.tile-name {
+  font-size: 0.7rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tile-desc {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  opacity: 0.45;
+  text-transform: uppercase;
+}
+
+.tile-preview {
+  flex: 1;
+  padding: 0.75rem 1.25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tile-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+}
+
+.tile-table th,
+.tile-table td {
+  border: 1px solid color-mix(in srgb, var(--ink) 15%, transparent);
+  padding: 3px 6px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100px;
+  text-overflow: ellipsis;
+}
+
+.tile-table th {
+  font-weight: var(--w-black);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.55rem;
+  opacity: 0.6;
+}
+
+.tile-key {
+  font-weight: var(--w-black);
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.tile-meta {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  opacity: 0.4;
+  text-transform: uppercase;
+}
+
+/* ── No-tool fallback ─────────────────────────────────── */
+.tiles-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.tiles-empty-type {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.2em;
+  opacity: 0.3;
+}
+
+.tiles-empty-msg {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  opacity: 0.3;
+  text-transform: uppercase;
+}

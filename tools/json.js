@@ -1,3 +1,30 @@
+export function preview(container, raw) {
+  try {
+    const obj = JSON.parse(raw);
+    const isArr = Array.isArray(obj);
+    const src = isArr ? obj[0] : obj;
+    const keys = src && typeof src === 'object' ? Object.keys(src).slice(0, 5) : [];
+
+    const meta = document.createElement('div');
+    meta.className = 'tile-meta';
+    meta.textContent = isArr ? `Array · ${obj.length} items` : `Object · ${keys.length} keys`;
+    container.appendChild(meta);
+
+    const t = document.createElement('table');
+    t.className = 'tile-table';
+    keys.forEach(k => {
+      const tr = t.insertRow();
+      const kd = tr.insertCell(); kd.className = 'tile-key'; kd.textContent = k;
+      const vd = tr.insertCell();
+      const v = src[k];
+      vd.textContent = v === null ? 'null' : typeof v === 'object' ? (Array.isArray(v) ? `[…]` : '{…}') : String(v).slice(0, 30);
+    });
+    container.appendChild(t);
+  } catch {
+    container.textContent = 'Preview unavailable';
+  }
+}
+
 export function render(container, raw) {
   if (!window.AUTIL_FLAGS?.JSON_SEMANTIC_DIFF) {
     container.innerHTML = '<p class="tool-offline">Tool offline.</p>';
