@@ -4,22 +4,21 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Image Tools — resize, remove background, add text overlays, convert formats
-- JWT Decoder — paste a JWT, see decoded header/payload/signature with expiry highlighted
-- URL Inspector — break a URL into components, decode query params and encoded values
-- HEX Color Inspector — paste hex or rgb, see conversions across all color spaces with swatches
-- Base64 Inspector — paste base64, auto-detect and decode to text or binary preview
-- Regex Tester — paste a regex and test strings against it live, see match groups highlighted
-- Unix Timestamp Converter — paste a unix timestamp or ISO date, convert between all common formats
-- YAML ↔ JSON — paste YAML or JSON, convert in both directions with syntax display
-- SQL Formatter — paste raw SQL, get it indented, formatted, and keywords uppercased
-- Text Diff — paste two blocks of plain text, see a line-by-line diff
-- Number Base Converter — paste a number in any base, see bin/oct/dec/hex all at once
-- HTTP Status Lookup — paste a status code, get name, description, and common causes
-- Markdown Previewer — paste markdown, see rendered output side by side
-- DNS Lookup — paste a domain, resolve A/AAAA/MX/TXT/CNAME via DNS over HTTPS
-- UUID Inspector — generate UUIDs or paste one to decode version, variant, and timestamp
-- Hash Generator — paste text, get MD5/SHA-1/SHA-256/SHA-512 all at once via WebCrypto
+- Image Compressor — drop any image, pick quality/max size, download compressed version
+- Image Resizer — drop image, set width × height or percentage, download resized copy
+- Background Remover — drop image, remove background in-browser via ML, download PNG
+- PDF Merger — drop multiple PDFs, reorder pages, download merged file
+- QR Code Generator — type text or URL, get a scannable QR code to download or copy
+- Image to Text (OCR) — drop a photo or screenshot, extract all readable text
+- Color Palette Extractor — drop any image, get dominant colors as swatches and hex codes
+- Unit Converter — convert length, weight, temperature, area, speed, volume all in one place
+- Password Generator — set length and complexity, generate and copy a secure password
+- Bill Splitter — enter total, tip, and number of people, see per-person breakdown instantly
+- Word Counter — paste text, see word count, character count, reading time, and top words
+- Loan Calculator — enter principal, rate, and term, see monthly payment and full amortization
+- Video Trimmer — drop a video, set start and end time, download the trimmed clip
+- Invoice Generator — fill in items and client details, download a clean PDF invoice
+- Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
 
@@ -30,3 +29,10 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 ## Deferred
 
 - SVG Path Visualizer — paste SVG path data, see interactive preview and cleaned output
+- JWT Decoder — paste a JWT, see decoded header/payload/signature with expiry highlighted
+- Regex Tester — paste a regex and test strings against it live, see match groups highlighted
+- Base64 Inspector — paste base64, auto-detect and decode to text or binary preview
+- Hash Generator — paste text, get MD5/SHA-1/SHA-256/SHA-512 all at once via WebCrypto
+- UUID Inspector — generate UUIDs or paste one to decode version, variant, and timestamp
+- SQL Formatter — paste raw SQL, get it indented, formatted, and keywords uppercased
+- DNS Lookup — paste a domain, resolve A/AAAA/MX/TXT/CNAME via DNS over HTTPS
