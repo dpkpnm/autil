@@ -2,6 +2,8 @@
 
 Drop anything. Get a tool for it. Nothing leaves your browser.
 
+**[autil.app](https://autil.app)** · [Roadmap](ROADMAP.md) · [Issues](https://github.com/dpkpnm/autil/issues)
+
 ---
 
 Autil is a browser utility kit that runs 100% locally. Paste a JWT, drop a CSV, type a cron expression — it figures out what you gave it and shows you something useful. No accounts. No servers. No uploads.
