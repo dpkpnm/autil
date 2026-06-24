@@ -13,18 +13,21 @@ window.AUTIL_FLAGS = {
   TEMPORAL_CALENDAR_P2P:       true,
   CRYPTOGRAPHIC_DEVELOPER_KIT: true,
   WASM_FFMPEG_TRANSCODER:      false,
+  IMAGE_COMPRESSOR:            true,
 };
 
 // ── Tool registry ──────────────────────────────────────
 const TOOLS = [
-  { slug: 'grid', name: 'Data Grid',      desc: 'Sort · filter · group · edit',  accepts: ['csv', 'tsv', 'jsonarray'] },
-  { slug: 'json', name: 'JSON Diff',       desc: 'Compare two JSON payloads',     accepts: ['json', 'jsonarray'] },
-  { slug: 'cron', name: 'Cron Humanizer',  desc: 'Human-readable schedule',       accepts: ['cron'] },
+  { slug: 'grid',             name: 'Data Grid',        desc: 'Sort · filter · group · edit',  accepts: ['csv', 'tsv', 'jsonarray'] },
+  { slug: 'json',             name: 'JSON Diff',         desc: 'Compare two JSON payloads',     accepts: ['json', 'jsonarray'] },
+  { slug: 'cron',             name: 'Cron Humanizer',    desc: 'Human-readable schedule',       accepts: ['cron'] },
+  { slug: 'image-compressor', name: 'Image Compressor',  desc: 'Compress · convert · download', accepts: ['image'] },
 ];
 
 // ── Type detection ─────────────────────────────────────
 function detect(raw) {
   const t = raw.trim();
+  if (t.startsWith('data:image/')) return 'image';
   if (t.startsWith('[')) {
     try {
       const p = JSON.parse(t);
@@ -178,7 +181,11 @@ function readFile(file) {
   setStatus(file.name.toUpperCase());
   const reader = new FileReader();
   reader.onload = e => route(e.target.result);
-  reader.readAsText(file);
+  if (file.type.startsWith('image/')) {
+    reader.readAsDataURL(file);
+  } else {
+    reader.readAsText(file);
+  }
 }
 
 // ── Back to drop ───────────────────────────────────────

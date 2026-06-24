@@ -4,210 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AUTIL</title>
-  <style>
-    :root {
-      --black:   #000;
-      --white:   #fff;
-      --mid:     #666;
-      --rule:    1px solid #000;
-      --pad:     24px;
-      --mono:    'Courier New', Courier, monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--mono);
-      background: var(--white);
-      color: var(--black);
-      min-height: 100dvh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-    }
-
-    /* ── Header ── */
-    header {
-      padding: var(--pad);
-      border-bottom: var(--rule);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-    }
-
-    .wordmark {
-      font-size: 0.875rem;
-      font-weight: bold;
-      letter-spacing: 0.25em;
-    }
-
-    .tagline {
-      font-size: 0.65rem;
-      color: var(--mid);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* ── Drop zone ── */
-    main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--pad);
-    }
-
-    #drop {
-      width: 100%;
-      max-width: 600px;
-      min-height: 280px;
-      border: var(--rule);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      cursor: pointer;
-      padding: 48px 32px;
-      text-align: center;
-      user-select: none;
-      transition: background 80ms, color 80ms;
-    }
-
-    #drop.over {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    #drop.over .hint { color: #999; }
-
-    .instruction {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hint {
-      font-size: 0.65rem;
-      color: var(--mid);
-      letter-spacing: 0.06em;
-    }
-
-    /* ── Tool output area ── */
-    #tool {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 16px;
-      display: none;
-    }
-
-    /* ── Footer ── */
-    footer {
-      padding: 12px var(--pad);
-      border-top: var(--rule);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.65rem;
-      color: var(--mid);
-      letter-spacing: 0.08em;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <span class="wordmark">AUTIL</span>
-    <span class="tagline">Drop or paste anything &mdash; 100% local</span>
-  </header>
+  <aapp>
 
-  <main>
-    <div style="width:100%;max-width:600px;">
-      <div id="drop">
-        <div class="instruction">Drop file &nbsp;/&nbsp; paste &nbsp;/&nbsp; click</div>
-        <div class="hint">JSON &middot; JWT &middot; CSV &middot; URL &middot; HEX &middot; BASE64 &middot; TEXT</div>
-      </div>
-      <div id="tool"></div>
-    </div>
-  </main>
+    <ahead>
+      <amark>AUTIL</amark>
+      <atag>100% local &middot; no data leaves your browser</atag>
+    </ahead>
 
-  <footer>
-    <span>NO DATA LEAVES YOUR BROWSER</span>
-    <span id="status">READY</span>
-  </footer>
+    <adrop id="drop">
+      <alabel>Drop<br>Anything.</alabel>
+      <ahint>JSON &middot; JWT &middot; CSV &middot; URL &middot; HEX &middot; BASE64 &middot; TEXT</ahint>
+    </adrop>
 
-  <script>
-    // ── Feature flags — toggle tools without redeployment ──
-    window.AUTIL_FLAGS = {
-      SPREADSHEET_GRID_V1:         true,
-      TEMPORAL_CALENDAR_P2P:       true,
-      CRYPTOGRAPHIC_DEVELOPER_KIT: true,
-      WASM_FFMPEG_TRANSCODER:      false,
-    };
+    <amain id="main" hidden></amain>
 
-    const drop   = document.getElementById('drop');
-    const tool   = document.getElementById('tool');
-    const status = document.getElementById('status');
+    <afooter>
+      <ainfo>Paste &middot; drag &middot; or click</ainfo>
+      <astatus id="status" data-ready>READY</astatus>
+    </afooter>
 
-    // ── Drag and drop ──
-    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
-    drop.addEventListener('dragleave', () => drop.classList.remove('over'));
-    drop.addEventListener('drop', e => {
-      e.preventDefault();
-      drop.classList.remove('over');
-      const file = e.dataTransfer.files[0];
-      if (file) return readFile(file);
-      const text = e.dataTransfer.getData('text');
-      if (text) route(text);
-    });
+  </aapp>
 
-    // ── Click to pick file ──
-    drop.addEventListener('click', () => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.onchange = e => readFile(e.target.files[0]);
-      input.click();
-    });
-
-    // ── Paste anywhere ──
-    document.addEventListener('paste', e => {
-      const text = e.clipboardData.getData('text');
-      if (text) return route(text);
-      const file = e.clipboardData.files[0];
-      if (file) readFile(file);
-    });
-
-    function readFile(file) {
-      setStatus(`${file.name}`);
-      const reader = new FileReader();
-      reader.onload = e => route(e.target.result, file.type);
-      reader.readAsText(file);
-    }
-
-    // ── Type detection ──
-    function detect(raw) {
-      const t = raw.trim();
-      if (t.startsWith('{') || t.startsWith('['))                        return 'JSON';
-      if (/^[\w-]+\.[\w-]+\.[\w-]+$/.test(t))                           return 'JWT';
-      if (/^https?:\/\//.test(t))                                        return 'URL';
-      if (t.includes(',') && t.split('\n').length > 1)                   return 'CSV';
-      if (/^([0-9a-fA-F]{2}\s*)+$/.test(t))                             return 'HEX';
-      if (/^[A-Za-z0-9+/]+=*$/.test(t) && t.length % 4 === 0)          return 'BASE64';
-      return 'TEXT';
-    }
-
-    // ── Route input to the right tool ──
-    function route(raw, mimeHint) {
-      const type = detect(raw);
-      setStatus(type);
-      tool.style.display = 'block';
-      tool.innerHTML = `<div style="padding:16px 0;font-size:0.7rem;color:#666;letter-spacing:.08em;">DETECTED: ${type} — tool module loading...</div>`;
-      // Tool modules injected here by Claude SWE
-    }
-
-    function setStatus(msg) {
-      status.textContent = msg.toUpperCase();
-    }
-  </script>
+  <script type="module" src="app.js"></script>
 
 </body>
 </html>

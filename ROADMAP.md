@@ -4,7 +4,6 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Image Compressor — drop any image, pick quality/max size, download compressed version
 - Image Resizer — drop image, set width × height or percentage, download resized copy
 - Background Remover — drop image, remove background in-browser via ML, download PNG
 - PDF Merger — drop multiple PDFs, reorder pages, download merged file
@@ -21,6 +20,7 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 - Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
+- Image Compressor — Drop any image, pick the quality or maximum size, and download the compressed ve — 6/24
 
 - Data Grid — CSV · TSV · JSON array → virtual scroll grid, sort, filter, group, IndexedDB — 6/24
 - JSON Semantic Diff — compare two JSON payloads, see additions/deletions/modifications highlighted — 6/24
