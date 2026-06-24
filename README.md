@@ -6,24 +6,36 @@ Drop anything. Get a tool for it. Nothing leaves your browser.
 
 ---
 
-Autil is a browser utility kit that runs 100% locally. Paste a JWT, drop a CSV, type a cron expression — it figures out what you gave it and shows you something useful. No accounts. No servers. No uploads.
+Modern web development has convinced us that even the simplest task requires a database, a serverless backend, user accounts, and a recurring subscription.
 
-Every night, two AI agents wake up and ship new tools automatically.
+Autil is an experiment to prove the exact opposite: a single, static browser tab running entirely client-side, continually expanded by an autonomous AI agent, is enough to handle almost any daily digital utility.
+
+---
+
+## The browser is already an operating system
+
+Over the last twenty years, while software moved to the cloud, the browser quietly became powerful enough to replace it:
+
+- **WebCrypto** — hardware-accelerated encryption and hashing, locally
+- **WebAssembly** — run heavy native binaries (SQLite, FFmpeg) inside a tab
+- **IndexedDB** — persistent storage on the user's own drive
+- **Canvas / WebGL** — native graphics processing, no server needed
+- **WebRTC** — peer-to-peer data channels with no intermediary
+
+Pair that with a single-file codebase and an autonomous AI engineer, and you get something new: software that grows on its own, costs nothing to run, and never touches your data.
 
 ---
 
 ## How it works
 
-**Gemini** is the product manager. Each night it reads the [roadmap](ROADMAP.md), checks [GitHub issues](https://github.com/dpkpnm/autil/issues), and decides what to build next. It writes a short proposal log.
+**Gemini** is the product manager. Each night it reads the [roadmap](ROADMAP.md), checks [GitHub issues](https://github.com/dpkpnm/autil/issues), and decides what to build next.
 
 **Claude** is the engineer. It reads Gemini's proposal, writes the code, commits it, and pushes it live.
 
-By morning, new tools are on [autil.app](https://autil.app).
-
 ```
-You add an idea
+Idea added to roadmap or GitHub issue
     ↓
-Gemini picks it up, decides what to build
+Gemini picks it up and decides what to build
     ↓
 Claude writes the code and ships it
     ↓
@@ -34,19 +46,7 @@ Live by morning
 
 ## Want a tool built?
 
-Two ways:
-
-1. **Open a GitHub issue** — describe what you want. Gemini checks issues every night and picks the good ones.
-
-2. **Edit [ROADMAP.md](ROADMAP.md)** — add a row to the table with `backlog` status. It stays there until Claude ships it, then flips to `shipped`.
-
-That's it. No forms, no voting, no waiting list.
-
----
-
-## What's already built
-
-See [ROADMAP.md](ROADMAP.md) — every tool, its status, and the date it shipped.
+Open a [GitHub issue](https://github.com/dpkpnm/autil/issues) and describe what you want. Gemini checks issues every night and picks the good ones.
 
 ---
 
