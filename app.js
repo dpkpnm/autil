@@ -14,6 +14,7 @@ window.AUTIL_FLAGS = {
   CRYPTOGRAPHIC_DEVELOPER_KIT: true,
   WASM_FFMPEG_TRANSCODER:      false,
   IMAGE_COMPRESSOR:            true,
+  IMAGE_RESIZER:               true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -22,6 +23,7 @@ const TOOLS = [
   { slug: 'json',             name: 'JSON Diff',         desc: 'Compare two JSON payloads',     accepts: ['json', 'jsonarray'] },
   { slug: 'cron',             name: 'Cron Humanizer',    desc: 'Human-readable schedule',       accepts: ['cron'] },
   { slug: 'image-compressor', name: 'Image Compressor',  desc: 'Compress · convert · download', accepts: ['image'] },
+  { slug: 'image-resizer',   name: 'Image Resizer',     desc: 'Resize · % · download',         accepts: ['image'] },
 ];
 
 // ── Type detection ─────────────────────────────────────
