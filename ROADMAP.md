@@ -4,8 +4,21 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Video Trimmer — drop a video, set start and end time, download the trimmed clip
-- Invoice Generator — fill in items and client details, download a clean PDF invoice
+### Grid
+- Spreadsheet Editor — drop a CSV, edit cells inline, add/delete rows and columns, export as CSV or TSV
+- Pivot Table — drop a CSV or JSON array, pick row/column/value fields, see a live cross-tab summary
+
+### Image
+- Image Cropper — drop an image, drag to select a region, download the cropped file
+- Batch Image Converter — drop multiple images, pick a target format (WebP · JPEG · PNG), download a zip
+
+### PDF
+- PDF Splitter — drop a PDF, pick page ranges, download each range as its own file
+- PDF to Images — drop a PDF, render each page as a PNG via Canvas, download a zip
+
+### Zip
+- Zip Inspector — drop a zip file, browse the file tree, preview text files and images inline
+- Zip Builder — drop multiple files, set names and folder structure, download the zip
 
 ## Shipped
 
