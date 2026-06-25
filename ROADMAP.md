@@ -4,12 +4,11 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
+- Sticker maker - drop any image and draw with pencil to make a sticker out of it
 - PDF Merger — drop multiple PDFs, reorder pages, download merged file
 - QR Code Generator — type text or URL, get a scannable QR code to download or copy
-- Image to Text (OCR) — drop a photo or screenshot, extract all readable text
 - Color Palette Extractor — drop any image, get dominant colors as swatches and hex codes
 - Unit Converter — convert length, weight, temperature, area, speed, volume all in one place
-- Password Generator — set length and complexity, generate and copy a secure password
 - Bill Splitter — enter total, tip, and number of people, see per-person breakdown instantly
 - Word Counter — paste text, see word count, character count, reading time, and top words
 - Loan Calculator — enter principal, rate, and term, see monthly payment and full amortization
