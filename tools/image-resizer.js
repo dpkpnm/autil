@@ -3,7 +3,6 @@ import { el } from '../lib/dom.js';
 export function preview(container, raw) {
   if (!raw?.startsWith('data:image/')) return;
   container.appendChild(el('img', { class: 'ic-tile-img', src: raw, alt: '' }));
-  container.appendChild(el('div', { class: 'tile-meta', text: 'Image' }));
 }
 
 export function render(container, raw) {

@@ -5,7 +5,7 @@
   --red:     #e52e00;
   --yellow:  #f5c800;
   --blue:    #0057ff;
-  --dim:     #aaa;
+  --dim:     color-mix(in srgb, var(--ink) 80%, transparent);
 
   --rule:    2px solid var(--ink);
   --thin:    1px solid color-mix(in srgb, var(--ink) 20%, transparent);

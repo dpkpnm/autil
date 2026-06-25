@@ -4,10 +4,6 @@ export function preview(container, raw) {
   img.className = 'ic-tile-img';
   img.src = raw;
   container.appendChild(img);
-  const meta = document.createElement('div');
-  meta.className = 'tile-meta';
-  meta.textContent = 'Remove background';
-  container.appendChild(meta);
 }
 
 export async function render(container, raw) {

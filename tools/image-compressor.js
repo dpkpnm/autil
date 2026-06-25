@@ -4,8 +4,6 @@ export function preview(container, raw) {
   if (!raw?.startsWith('data:image/')) return;
   const img = el('img', { class: 'ic-tile-img', src: raw, alt: '' });
   container.appendChild(img);
-  const meta = el('div', { class: 'tile-meta', text: 'Image' });
-  container.appendChild(meta);
 }
 
 export function render(container, raw) {
