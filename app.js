@@ -19,6 +19,12 @@ window.AUTIL_FLAGS = {
   STICKER_MAKER:               true,
   PDF_MERGER:                  true,
   QR_CODE:                     true,
+  COLOR_PALETTE:               true,
+  WORD_COUNTER:                true,
+  UNIT_CONVERTER:              true,
+  BILL_SPLITTER:               true,
+  LOAN_CALCULATOR:             true,
+  COUNTDOWN_TIMER:             true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -31,7 +37,13 @@ const TOOLS = [
   { slug: 'bg-remover',      name: 'Background Remover', desc: 'Remove background via ML',      accepts: ['image'] },
   { slug: 'sticker-maker',   name: 'Sticker Maker',      desc: 'Draw · mask · export sticker',  accepts: ['image'] },
   { slug: 'pdf-merger',      name: 'PDF Merger',          desc: 'Merge · reorder · download',    accepts: ['pdf'] },
-  { slug: 'qr-code',         name: 'QR Code',             desc: 'Text or URL → scannable code',  accepts: ['url', 'text'] },
+  { slug: 'qr-code',          name: 'QR Code',             desc: 'Text or URL → scannable code',  accepts: ['url', 'text'] },
+  { slug: 'color-palette',    name: 'Color Palette',       desc: 'Extract dominant colors',       accepts: ['image'] },
+  { slug: 'word-counter',     name: 'Word Counter',        desc: 'Count · read time · top words', accepts: ['text'] },
+  { slug: 'unit-converter',   name: 'Unit Converter',      desc: 'Length · weight · temp · more', accepts: ['text', 'url'] },
+  { slug: 'bill-splitter',    name: 'Bill Splitter',       desc: 'Split bill with tip',           accepts: ['text', 'url'] },
+  { slug: 'loan-calculator',  name: 'Loan Calculator',     desc: 'Monthly payment · amortization', accepts: ['text', 'url'] },
+  { slug: 'countdown-timer',  name: 'Countdown Timer',     desc: 'Count down to any date',        accepts: ['text', 'url'] },
 ];
 
 // ── Type detection ─────────────────────────────────────

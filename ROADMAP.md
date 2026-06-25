@@ -4,17 +4,17 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Color Palette Extractor — drop any image, get dominant colors as swatches and hex codes
-- Unit Converter — convert length, weight, temperature, area, speed, volume all in one place
-- Bill Splitter — enter total, tip, and number of people, see per-person breakdown instantly
-- Word Counter — paste text, see word count, character count, reading time, and top words
-- Loan Calculator — enter principal, rate, and term, see monthly payment and full amortization
 - Video Trimmer — drop a video, set start and end time, download the trimmed clip
 - Invoice Generator — fill in items and client details, download a clean PDF invoice
-- Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
 
+- Countdown Timer — set a date and time, count down to any event live — 6/24
+- Loan Calculator — enter principal, rate, and term, see monthly payment and full amortization — 6/24
+- Bill Splitter — enter total, tip, and number of people, see per-person breakdown instantly — 6/24
+- Word Counter — paste text, see word count, character count, reading time, and top words — 6/24
+- Unit Converter — convert length, weight, temperature, area, speed, volume all in one place — 6/24
+- Color Palette Extractor — drop any image, get dominant colors as swatches and hex codes — 6/24
 - QR Code Generator — type text or URL, get a scannable QR code to download or copy — 6/24
 - PDF Merger — drop multiple PDFs, reorder pages, download merged file — 6/24
 - Sticker Maker — drop image, draw to outline subject, export transparent PNG — 6/24
