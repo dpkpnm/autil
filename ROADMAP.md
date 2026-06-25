@@ -17,6 +17,7 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 - Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
+- Sticker Maker — Drop any image, draw with a pencil to outline a path, and download the generated — 6/24
 
 - Background Remover — drop image, remove background in-browser via ML, download PNG — 6/24
 - Image Resizer — drop image, set width × height or percentage, download resized copy — 6/24

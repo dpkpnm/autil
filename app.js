@@ -16,6 +16,7 @@ window.AUTIL_FLAGS = {
   IMAGE_COMPRESSOR:            true,
   IMAGE_RESIZER:               true,
   BACKGROUND_REMOVER:          true,
+  STICKER_MAKER:               true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -26,6 +27,7 @@ const TOOLS = [
   { slug: 'image-compressor', name: 'Image Compressor',  desc: 'Compress · convert · download', accepts: ['image'] },
   { slug: 'image-resizer',   name: 'Image Resizer',      desc: 'Resize · scale · download',     accepts: ['image'] },
   { slug: 'bg-remover',      name: 'Background Remover', desc: 'Remove background via ML',      accepts: ['image'] },
+  { slug: 'sticker-maker',   name: 'Sticker Maker',      desc: 'Draw · mask · export sticker',  accepts: ['image'] },
 ];
 
 // ── Type detection ─────────────────────────────────────
