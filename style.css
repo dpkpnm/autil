@@ -1456,3 +1456,96 @@ amain {
   text-align: center;
 }
 
+/* ── PDF Merger ───────────────────────────────────────── */
+.pm { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+
+.pm-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;
+  height: 2.75rem;
+  border-bottom: var(--rule);
+  flex-shrink: 0;
+}
+
+.pm-title {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.pm-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1.5rem var(--pad);
+  gap: 1rem;
+}
+
+.pm-drop {
+  border: var(--thin);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s;
+  flex-shrink: 0;
+}
+.pm-drop:hover, .pm-drop-over { background: color-mix(in srgb, var(--ink) 4%, transparent); }
+
+.pm-drop-text {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.pm-list { display: flex; flex-direction: column; gap: 0; }
+
+.pm-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: var(--thin);
+}
+
+.pm-row-idx {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  width: 1.5rem;
+  flex-shrink: 0;
+}
+
+.pm-row-name {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pm-row-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+.pm-tile-icon {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.15em;
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  padding: 4px 8px;
+  display: inline-block;
+}
+

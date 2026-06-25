@@ -17,6 +17,7 @@ window.AUTIL_FLAGS = {
   IMAGE_RESIZER:               true,
   BACKGROUND_REMOVER:          true,
   STICKER_MAKER:               true,
+  PDF_MERGER:                  true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -28,12 +29,14 @@ const TOOLS = [
   { slug: 'image-resizer',   name: 'Image Resizer',      desc: 'Resize · scale · download',     accepts: ['image'] },
   { slug: 'bg-remover',      name: 'Background Remover', desc: 'Remove background via ML',      accepts: ['image'] },
   { slug: 'sticker-maker',   name: 'Sticker Maker',      desc: 'Draw · mask · export sticker',  accepts: ['image'] },
+  { slug: 'pdf-merger',      name: 'PDF Merger',          desc: 'Merge · reorder · download',    accepts: ['pdf'] },
 ];
 
 // ── Type detection ─────────────────────────────────────
 function detect(raw) {
   const t = raw.trim();
   if (t.startsWith('data:image/')) return 'image';
+  if (t.startsWith('data:application/pdf')) return 'pdf';
   if (t.startsWith('[')) {
     try {
       const p = JSON.parse(t);
@@ -187,7 +190,7 @@ function readFile(file) {
   setStatus(file.name.toUpperCase());
   const reader = new FileReader();
   reader.onload = e => route(e.target.result);
-  if (file.type.startsWith('image/')) {
+  if (file.type.startsWith('image/') || file.type === 'application/pdf') {
     reader.readAsDataURL(file);
   } else {
     reader.readAsText(file);

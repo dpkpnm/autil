@@ -4,8 +4,6 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Sticker maker - drop any image and draw with pencil to make a sticker out of it
-- PDF Merger — drop multiple PDFs, reorder pages, download merged file
 - QR Code Generator — type text or URL, get a scannable QR code to download or copy
 - Color Palette Extractor — drop any image, get dominant colors as swatches and hex codes
 - Unit Converter — convert length, weight, temperature, area, speed, volume all in one place
@@ -17,8 +15,9 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 - Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
-- Sticker Maker — Drop any image, draw with a pencil to outline a path, and download the generated — 6/24
 
+- PDF Merger — drop multiple PDFs, reorder pages, download merged file — 6/24
+- Sticker Maker — drop image, draw to outline subject, export transparent PNG — 6/24
 - Background Remover — drop image, remove background in-browser via ML, download PNG — 6/24
 - Image Resizer — drop image, set width × height or percentage, download resized copy — 6/24
 - Image Compressor — drop image, pick quality or max size, download compressed version — 6/24
