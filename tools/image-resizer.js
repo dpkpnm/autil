@@ -1,4 +1,4 @@
-import { el } from './lib/dom.js';
+import { el } from './lib/dom.js'; // v2
 
 export function preview(container, raw) {
   if (!raw?.startsWith('data:image/')) return;
