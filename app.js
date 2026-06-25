@@ -15,6 +15,7 @@ window.AUTIL_FLAGS = {
   WASM_FFMPEG_TRANSCODER:      false,
   IMAGE_COMPRESSOR:            true,
   IMAGE_RESIZER:               true,
+  BACKGROUND_REMOVER:          true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -23,7 +24,8 @@ const TOOLS = [
   { slug: 'json',             name: 'JSON Diff',         desc: 'Compare two JSON payloads',     accepts: ['json', 'jsonarray'] },
   { slug: 'cron',             name: 'Cron Humanizer',    desc: 'Human-readable schedule',       accepts: ['cron'] },
   { slug: 'image-compressor', name: 'Image Compressor',  desc: 'Compress · convert · download', accepts: ['image'] },
-  { slug: 'image-resizer',   name: 'Image Resizer',     desc: 'Resize · % · download',         accepts: ['image'] },
+  { slug: 'image-resizer',   name: 'Image Resizer',      desc: 'Resize · scale · download',     accepts: ['image'] },
+  { slug: 'bg-remover',      name: 'Background Remover', desc: 'Remove background via ML',      accepts: ['image'] },
 ];
 
 // ── Type detection ─────────────────────────────────────

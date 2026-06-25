@@ -1255,3 +1255,126 @@ amain {
   opacity: 0.3;
   text-transform: uppercase;
 }
+
+/* ── Background Remover ───────────────────────────────── */
+.bgr { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+
+.bgr-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1rem;
+  height: 2.75rem;
+  border-bottom: var(--rule);
+  flex-shrink: 0;
+}
+
+.bgr-title {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.bgr-body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bgr-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+  padding: 2rem;
+}
+
+.bgr-status {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.bgr-track {
+  width: 240px;
+  height: 2px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.bgr-fill {
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.bgr-note {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  opacity: 0.4;
+  text-transform: uppercase;
+}
+
+.bgr-error {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--red);
+  text-align: center;
+  padding: 1rem;
+}
+
+.bgr-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.bgr-pane {
+  display: flex;
+  flex-direction: column;
+  border-right: var(--thin);
+  overflow: hidden;
+}
+
+.bgr-pane:last-child { border-right: none; }
+
+.bgr-pane-label {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: var(--w-black);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-bottom: var(--thin);
+  flex-shrink: 0;
+}
+
+.bgr-pane canvas {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.bgr-checkered {
+  background-image:
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+}
+

@@ -4,7 +4,6 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 
 ## Backlog
 
-- Background Remover — drop image, remove background in-browser via ML, download PNG
 - PDF Merger — drop multiple PDFs, reorder pages, download merged file
 - QR Code Generator — type text or URL, get a scannable QR code to download or copy
 - Image to Text (OCR) — drop a photo or screenshot, extract all readable text
@@ -19,9 +18,10 @@ Add ideas below. Gemini picks from the list, Claude ships them and adds the date
 - Countdown Timer — set a date and time, share a live countdown link with anyone
 
 ## Shipped
-- Image Resizer — Drop any image, set the width × height or percentage, and download the resized c — 6/24
-- Image Compressor — Drop any image, pick the quality or maximum size, and download the compressed ve — 6/24
 
+- Background Remover — drop image, remove background in-browser via ML, download PNG — 6/24
+- Image Resizer — drop image, set width × height or percentage, download resized copy — 6/24
+- Image Compressor — drop image, pick quality or max size, download compressed version — 6/24
 - Data Grid — CSV · TSV · JSON array → virtual scroll grid, sort, filter, group, IndexedDB — 6/24
 - JSON Semantic Diff — compare two JSON payloads, see additions/deletions/modifications highlighted — 6/24
 - Cron Humanizer — paste a cron expression, get human-readable schedule and next 5 runtimes — 6/24
