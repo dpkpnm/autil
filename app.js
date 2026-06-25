@@ -18,6 +18,7 @@ window.AUTIL_FLAGS = {
   BACKGROUND_REMOVER:          true,
   STICKER_MAKER:               true,
   PDF_MERGER:                  true,
+  QR_CODE:                     true,
 };
 
 // ── Tool registry ──────────────────────────────────────
@@ -30,6 +31,7 @@ const TOOLS = [
   { slug: 'bg-remover',      name: 'Background Remover', desc: 'Remove background via ML',      accepts: ['image'] },
   { slug: 'sticker-maker',   name: 'Sticker Maker',      desc: 'Draw · mask · export sticker',  accepts: ['image'] },
   { slug: 'pdf-merger',      name: 'PDF Merger',          desc: 'Merge · reorder · download',    accepts: ['pdf'] },
+  { slug: 'qr-code',         name: 'QR Code',             desc: 'Text or URL → scannable code',  accepts: ['url', 'text'] },
 ];
 
 // ── Type detection ─────────────────────────────────────
